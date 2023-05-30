@@ -1,0 +1,36 @@
+name: github_surfer
+description: simple app
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.5
+  flutter_riverpod: ^2.3.6
+  isar: ^3.1.0+1
+  dio: ^5.1.2
+  page_transition: ^2.0.9
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/fonts/
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/raleway-regular.ttf
+          weight: 400
+        - asset: assets/fonts/raleway-semibold.ttf
+          weight: 600
