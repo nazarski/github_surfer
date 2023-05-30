@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_surfer/constants/app_strings.dart';
 import 'package:github_surfer/pages/home_screen/home_screen.dart';
+import 'package:github_surfer/providers/isar_provider.dart';
+import 'package:github_surfer/providers/search_history_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_styles.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   static const String routeName = '/';
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, HomeScreen.routeName, (route) => false);
-    });
-    super.initState();
-  }
-
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    ref.listen(searchHistoryProvider, (_, next) {
+      if(next.hasValue) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, HomeScreen.routeName, (route) => false);
+      }
+    });
     return Material(
       color: AppColors.accentPrimary,
       child: Column(
@@ -36,7 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
               color: AppColors.layer,
             ),
           ),
-          const SizedBox(height: 16,),
+          const SizedBox(
+            height: 16,
+          ),
           const CircularProgressIndicator.adaptive()
         ],
       ),

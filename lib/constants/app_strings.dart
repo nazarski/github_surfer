@@ -13,5 +13,5 @@ class AppStrings {
   static const String nothingWasFoundMessage =
       'Nothing was find for your search. Please check the spelling';
   static const String emptySearchHistoryMessage =
-      'You have empty history. Click on search to start journey!';
+      'You have empty history.\nClick on search to start journey!';
 }

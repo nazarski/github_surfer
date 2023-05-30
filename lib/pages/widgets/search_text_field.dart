@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_surfer/constants/app_strings.dart';
+import 'package:github_surfer/providers/search_history_provider.dart';
 import 'package:github_surfer/providers/search_section_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_icons.dart';
@@ -30,12 +31,12 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
       if (_textController.text.isNotEmpty) {
         ref
             .read(searchSectionProvider.notifier)
-            .notifyStatusChange(searchValueIsEmpty: true);
+            .notifyStatusChange(searchValueIsEmpty: false);
       }
       if (_textController.text.isEmpty) {
         ref
             .read(searchSectionProvider.notifier)
-            .notifyStatusChange(searchValueIsEmpty: false);
+            .notifyStatusChange(searchValueIsEmpty: true);
       }
     });
   }
@@ -49,6 +50,7 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
   @override
   Widget build(BuildContext context) {
     final hasValue = ref.watch(searchSectionProvider) == SearchStatus.value;
+    // final newSearchValue = r
     return TextField(
       controller: _textController,
       focusNode: _focusNode,
@@ -56,8 +58,9 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
       style: AppStyles.body,
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.search,
-      onSubmitted: (value) {},
-      onEditingComplete: () {},
+      onSubmitted: (value) {
+        ref.read(searchHistoryProvider.notifier).addToHistory(value: value);
+      },
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 10, 16),

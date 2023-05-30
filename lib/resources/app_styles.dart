@@ -17,4 +17,10 @@ class AppStyles {
     fontSize: 14,
     // height: 2.0,
   );
+  static const TextStyle bodyMessage = TextStyle(
+    color: AppColors.textPlaceHolder,
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    // height: 2.0,
+  );
 }

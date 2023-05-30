@@ -16,7 +16,7 @@ class SearchSectionProvider extends StateNotifier<SearchStatus> {
     if (searchValueIsEmpty && state != SearchStatus.empty) {
       state = SearchStatus.empty;
     }
-    if (searchValueIsEmpty && state != SearchStatus.value) {
+    if (!searchValueIsEmpty && state != SearchStatus.value) {
       state = SearchStatus.value;
     }
   }
