@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_surfer/constants/app_strings.dart';
+import 'package:github_surfer/entities/paginated_request.dart';
+import 'package:github_surfer/providers/github_repository_provider.dart';
 import 'package:github_surfer/providers/search_history_provider.dart';
 import 'package:github_surfer/providers/search_section_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
@@ -50,7 +52,11 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
   @override
   Widget build(BuildContext context) {
     final hasValue = ref.watch(searchSectionProvider) == SearchStatus.value;
-    // final newSearchValue = r
+    ref.listen(paginatedRequestProvider, (_, next) {
+      if(_textController.text != next.searchValue){
+        _textController.text = next.searchValue;
+      }
+    });
     return TextField(
       controller: _textController,
       focusNode: _focusNode,
@@ -60,6 +66,7 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
       textInputAction: TextInputAction.search,
       onSubmitted: (value) {
         ref.read(searchHistoryProvider.notifier).addToHistory(value: value);
+        ref.read(paginatedRequestProvider.notifier).setNewValue(value);
       },
       decoration: InputDecoration(
         prefixIcon: Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_surfer/constants/app_strings.dart';
+import 'package:github_surfer/pages/home_screen/widgets/repository_search_column.dart';
 import 'package:github_surfer/pages/home_screen/widgets/search_history_column.dart';
 import 'package:github_surfer/pages/widgets/search_text_field.dart';
 import 'package:github_surfer/providers/search_section_provider.dart';
@@ -72,6 +73,7 @@ class SearchSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SearchTextField(),
+        const SizedBox(height: 16,),
         Expanded(
           child: switch (searchSection) {
             SearchStatus.empty => const SearchHistoryColumn(),
@@ -83,13 +85,6 @@ class SearchSection extends ConsumerWidget {
   }
 }
 
-class RepositorySearchColumn extends StatelessWidget {
-  const RepositorySearchColumn({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
 
 
