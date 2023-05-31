@@ -53,7 +53,7 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
   Widget build(BuildContext context) {
     final hasValue = ref.watch(searchSectionProvider) == SearchStatus.value;
     ref.listen(paginatedRequestProvider, (_, next) {
-      if(_textController.text != next.searchValue){
+      if (_textController.text != next.searchValue) {
         _textController.text = next.searchValue;
       }
     });

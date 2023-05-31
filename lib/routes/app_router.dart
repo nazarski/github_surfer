@@ -5,7 +5,6 @@ import 'package:github_surfer/pages/home_screen/home_screen.dart';
 import 'package:github_surfer/pages/splash_screen/splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class AppRouter {
   const AppRouter._();
 
@@ -15,12 +14,12 @@ class AppRouter {
     switch (settings.name) {
       case SplashScreen.routeName:
         return PageTransition(
-          child:  const SplashScreen(),
+          child: const SplashScreen(),
           type: PageTransitionType.fade,
         );
       case HomeScreen.routeName:
         return PageTransition(
-          child:  const HomeScreen(),
+          child: const HomeScreen(),
           type: PageTransitionType.fade,
         );
 

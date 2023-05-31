@@ -16,5 +16,4 @@ class PaginatedRequest {
       searchValue: searchValue ?? this.searchValue,
     );
   }
-
 }

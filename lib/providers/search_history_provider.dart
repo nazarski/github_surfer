@@ -5,8 +5,8 @@ import 'package:github_surfer/models/search_history_model.dart';
 import 'package:github_surfer/providers/isar_repo_provider.dart';
 import 'package:github_surfer/repository/isar_repository.dart';
 
-final searchHistoryProvider = StateNotifierProvider<
-    SearchHistoryProvider, AsyncValue<List<SearchHistoryModel>>>((ref) {
+final searchHistoryProvider = StateNotifierProvider<SearchHistoryProvider,
+    AsyncValue<List<SearchHistoryModel>>>((ref) {
   final repo = ref.read(isarRepoProvider);
   return SearchHistoryProvider(repo);
 });

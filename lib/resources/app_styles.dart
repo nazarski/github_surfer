@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 

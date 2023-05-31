@@ -1,4 +1,3 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_surfer/data/github_api_data.dart';
 import 'package:github_surfer/entities/paginated_request.dart';
@@ -16,7 +15,7 @@ final paginatedRequestProvider = StateNotifierProvider.autoDispose<
 class PaginatedRequestNotifier extends StateNotifier<PaginatedRequest> {
   PaginatedRequestNotifier() : super(const PaginatedRequest());
 
-  void setNewValue(value){
+  void setNewValue(value) {
     state = state.copyWith(page: 1, searchValue: value);
   }
 }

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_surfer/constants/app_strings.dart';
-import 'package:github_surfer/pages/home_screen/widgets/repository_search_column.dart';
-import 'package:github_surfer/pages/home_screen/widgets/search_history_column.dart';
-import 'package:github_surfer/pages/widgets/search_text_field.dart';
-import 'package:github_surfer/providers/search_section_provider.dart';
-import 'package:github_surfer/resources/app_colors.dart';
+import 'package:github_surfer/pages/home_screen/widgets/search_section.dart';
+import 'package:github_surfer/pages/widgets/app_app_bar.dart';
+import 'package:github_surfer/pages/widgets/app_bar_icon_button.dart';
 import 'package:github_surfer/resources/app_icons.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,38 +13,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppStrings.githubReposList),
+      appBar: AppAppBar(
+        title: AppStrings.githubReposList,
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                    color: AppColors.accentPrimary),
-                child: SvgPicture.asset(
-                  AppIcons.starFilled,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.main,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-            ),
+          AppBarIconButton(
+            onTap: () {},
+            iconAsset: AppIcons.starFilled,
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(3),
-          child: Container(
-            height: 3,
-            decoration: const BoxDecoration(color: AppColors.layer),
-          ),
-        ),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(
@@ -60,31 +32,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-class SearchSection extends ConsumerWidget {
-  const SearchSection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final searchSection = ref.watch(searchSectionProvider);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SearchTextField(),
-        const SizedBox(height: 16,),
-        Expanded(
-          child: switch (searchSection) {
-            SearchStatus.empty => const SearchHistoryColumn(),
-            SearchStatus.value => const RepositorySearchColumn(),
-          },
-        ),
-      ],
-    );
-  }
-}
-
-
-
-

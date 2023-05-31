@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_surfer/constants/app_strings.dart';
+import 'package:github_surfer/pages/home_screen/widgets/repository_item.dart';
 import 'package:github_surfer/providers/github_repository_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_icons.dart';
@@ -14,10 +15,29 @@ class RepositorySearchColumn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ifEmpty = ref.watch(paginatedRequestProvider).searchValue.isEmpty;
     final githubReposCount = ref.watch(githubReposCountProvider);
     return githubReposCount.when(data: (int count) {
-      if (count == 0) {
+      if (count == 0 && ifEmpty) {
         return const SizedBox.shrink();
+      }
+      if (count == 0 && !ifEmpty) {
+        return Column(
+          children: [
+            Text(
+              AppStrings.whatWeHaveFound,
+              style: AppStyles.header.copyWith(color: AppColors.accentPrimary),
+            ),
+            const Spacer(),
+            const Text(
+              AppStrings.nothingWasFoundMessage,
+              style: AppStyles.bodyMessage,
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+          ],
+        );
       }
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,53 +80,5 @@ class RepositorySearchColumn extends ConsumerWidget {
     }, loading: () {
       return const Center(child: CircularProgressIndicator.adaptive());
     });
-  }
-}
-
-class RepositoryItem extends ConsumerWidget {
-  const RepositoryItem({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentRepo = ref.watch(currentGithubRepoProvider);
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: AppColors.layer,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
-      child: currentRepo.when(
-        data: (data) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  data.name,
-                  style: AppStyles.body,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              SvgPicture.asset(AppIcons.starFilled)
-            ],
-          );
-        },
-        error: (error, stackTrace) {
-          log('error: $error');
-          log('error: $stackTrace');
-          return const Center(
-            child: Icon(Icons.error),
-          );
-        },
-        loading: () => const Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
-      ),
-    );
   }
 }
