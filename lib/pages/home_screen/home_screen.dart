@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_surfer/constants/app_strings.dart';
+import 'package:github_surfer/pages/favorites_page/favorites_page.dart';
 import 'package:github_surfer/pages/home_screen/widgets/search_section.dart';
 import 'package:github_surfer/pages/widgets/app_app_bar.dart';
 import 'package:github_surfer/pages/widgets/app_bar_icon_button.dart';
@@ -7,7 +8,6 @@ import 'package:github_surfer/resources/app_icons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   static const String routeName = 'home_page';
 
   @override
@@ -17,7 +17,9 @@ class HomeScreen extends StatelessWidget {
         title: AppStrings.githubReposList,
         actions: [
           AppBarIconButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, FavoritesPage.routeName);
+            },
             iconAsset: AppIcons.starFilled,
           ),
         ],

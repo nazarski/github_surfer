@@ -17,6 +17,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: leading,
+      leadingWidth: 66,
       title: Text(title),
       actions: actions,
       bottom: PreferredSize(

@@ -5,6 +5,7 @@ part 'github_repo_model.g.dart';
 @collection
 class GithubRepoModel {
   Id id = Isar.autoIncrement;
+  @Index(unique: true)
   final int repoId;
   final String name;
 

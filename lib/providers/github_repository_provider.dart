@@ -5,6 +5,8 @@ import 'package:github_surfer/entities/paginated_response.dart';
 import 'package:github_surfer/models/github_repo_model.dart';
 import 'package:github_surfer/repository/github_repo_repository.dart';
 
+import 'favorites_provider.dart';
+
 final apiDataProvider = Provider<GithubApiData>((ref) => GithubApiData());
 
 final paginatedRequestProvider = StateNotifierProvider.autoDispose<
@@ -42,10 +44,11 @@ final paginatedGithubReposProvider =
   },
 );
 
-final githubReposCountProvider = Provider.autoDispose<AsyncValue<int>>((ref) {
-  return ref.watch(paginatedGithubReposProvider(0)).whenData(
-        (PaginatedResponse<GithubRepoModel> pageData) => pageData.totalResults,
-      );
+final githubReposCountProvider = FutureProvider.autoDispose<int>((ref) async {
+  await ref.read(favouriteIdsFutureProvider.future);
+  final initialRequest =
+      await ref.watch(paginatedGithubReposProvider(0).future);
+  return initialRequest.totalResults;
 });
 
 final currentGithubRepoProvider = Provider<AsyncValue<GithubRepoModel>>((ref) {

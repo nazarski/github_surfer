@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_surfer/constants/app_strings.dart';
 import 'package:github_surfer/pages/home_screen/widgets/repository_item.dart';
+import 'package:github_surfer/providers/favorites_provider.dart';
 import 'package:github_surfer/providers/github_repository_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_icons.dart';
