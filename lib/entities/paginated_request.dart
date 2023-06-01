@@ -1,3 +1,4 @@
+///Request class holds page num and search value
 class PaginatedRequest {
   final int page;
   final String searchValue;

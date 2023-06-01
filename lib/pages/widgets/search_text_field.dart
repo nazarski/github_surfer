@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:github_surfer/constants/app_strings.dart';
-import 'package:github_surfer/entities/paginated_request.dart';
+import 'package:github_surfer/resources/app_strings.dart';
 import 'package:github_surfer/providers/github_repository_provider.dart';
 import 'package:github_surfer/providers/search_history_provider.dart';
 import 'package:github_surfer/providers/search_section_provider.dart';
@@ -10,6 +9,7 @@ import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_icons.dart';
 import 'package:github_surfer/resources/app_styles.dart';
 
+///Input textField
 class SearchTextField extends ConsumerStatefulWidget {
   const SearchTextField({
     super.key,
@@ -41,12 +41,6 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
             .notifyStatusChange(searchValueIsEmpty: true);
       }
     });
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -93,5 +87,12 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
         fillColor: _focusNode.hasFocus ? AppColors.accentSecondary : null,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _textController.dispose();
+    super.dispose();
   }
 }

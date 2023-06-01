@@ -5,6 +5,8 @@ import 'package:github_surfer/pages/home_screen/widgets/search_history_column.da
 import 'package:github_surfer/pages/widgets/search_text_field.dart';
 import 'package:github_surfer/providers/search_section_provider.dart';
 
+///Checks if any input is present and returns widget
+///Input field is empty, returns [SearchHistoryColumn], if not [RepositorySearchColumn]
 class SearchSection extends ConsumerWidget {
   const SearchSection({
     super.key,

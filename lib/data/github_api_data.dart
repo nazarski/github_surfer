@@ -1,11 +1,12 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:github_surfer/entities/paginated_response.dart';
-import 'package:github_surfer/models/github_repo_model.dart';
+import 'package:github_surfer/models/githib_repo_model/github_repo_model.dart';
 
+///Data class REST API
 class GithubApiData {
-  final _dio = Dio(BaseOptions(baseUrl: 'https://api.github.com/search'));
+  final Dio _dio;
+
+  GithubApiData(this._dio);
 
   Future<PaginatedResponse<GithubRepoModel>> getRepositories({
     required int maxItems,
@@ -17,7 +18,6 @@ class GithubApiData {
       'page': page,
       'per_page': maxItems,
     });
-    log(response.realUri.toString());
     return PaginatedResponse.fromMap(
       map: response.data,
       maxItems: maxItems,

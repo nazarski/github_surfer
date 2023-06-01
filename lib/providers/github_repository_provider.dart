@@ -1,14 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_surfer/data/github_api_data.dart';
 import 'package:github_surfer/entities/paginated_request.dart';
 import 'package:github_surfer/entities/paginated_response.dart';
-import 'package:github_surfer/models/github_repo_model.dart';
-import 'package:github_surfer/repository/github_repo_repository.dart';
+import 'package:github_surfer/models/githib_repo_model/github_repo_model.dart';
+import 'package:github_surfer/providers/api_providers.dart';
 
 import 'favorites_provider.dart';
 
-final apiDataProvider = Provider<GithubApiData>((ref) => GithubApiData());
-
+///Holds new request as a state
 final paginatedRequestProvider = StateNotifierProvider.autoDispose<
     PaginatedRequestNotifier, PaginatedRequest>((ref) {
   return PaginatedRequestNotifier();
@@ -22,20 +20,17 @@ class PaginatedRequestNotifier extends StateNotifier<PaginatedRequest> {
   }
 }
 
-final githubRepoRepositoryProvider = Provider<GithubRepoRepository>(
-  (ref) {
-    final apiData = ref.watch(apiDataProvider);
-    return GithubRepoRepository(apiData);
-  },
-);
-
+/// The FutureProvider that does the fetching of the paginated list of repos
 final paginatedGithubReposProvider =
     FutureProvider.family.autoDispose<PaginatedResponse<GithubRepoModel>, int>(
   (ref, page) async {
     final request = ref.watch(paginatedRequestProvider);
+
+    /// Checks if there is any input
     if (request.searchValue.isNotEmpty) {
       final githubRepository = ref.watch(githubRepoRepositoryProvider);
-      // The API request:
+
+      /// The API request:
       final result = await githubRepository.getRepositories(
           request: request.copyWith(page: page + 1));
       return result;
@@ -44,6 +39,7 @@ final paginatedGithubReposProvider =
   },
 );
 
+///Returns number of items to build
 final githubReposCountProvider = FutureProvider.autoDispose<int>((ref) async {
   await ref.read(favouriteIdsFutureProvider.future);
   final initialRequest =

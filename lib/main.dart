@@ -1,22 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_surfer/models/github_repo_model.dart';
-import 'package:github_surfer/models/search_history_model.dart';
+import 'package:github_surfer/helpers/initialize_isar.dart';
 import 'package:github_surfer/providers/isar_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_styles.dart';
 import 'package:github_surfer/routes/app_router.dart';
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
-
-Future<Isar> initializeIsar() async {
-  final dir = await getApplicationDocumentsDirectory();
-  final isar = await Isar.open(
-    [SearchHistoryModelSchema, GithubRepoModelSchema],
-    directory: dir.path,
-  );
-  return isar;
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

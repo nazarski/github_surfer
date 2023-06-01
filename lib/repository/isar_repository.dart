@@ -1,6 +1,5 @@
-import 'package:github_surfer/entities/favorites_entity.dart';
-import 'package:github_surfer/models/github_repo_model.dart';
-import 'package:github_surfer/models/search_history_model.dart';
+import 'package:github_surfer/models/githib_repo_model/github_repo_model.dart';
+import 'package:github_surfer/models/search_history_model/search_history_model.dart';
 import 'package:isar/isar.dart';
 
 class IsarRepository {
@@ -25,6 +24,7 @@ class IsarRepository {
       return await _isar.githubRepoModels.where().findAll();
     });
   }
+
   Future<Set<int>> getFavoriteIds() async {
     return await _isar.txn(() async {
       final listOfRepos = await _isar.githubRepoModels.where().findAll();
@@ -32,12 +32,13 @@ class IsarRepository {
     });
   }
 
-  Future<void>saveItemToFavorites(GithubRepoModel repo)async{
+  Future<void> saveItemToFavorites(GithubRepoModel repo) async {
     await _isar.writeTxn(() async {
       await _isar.githubRepoModels.put(repo);
     });
   }
-  Future<void>removeItemFromFavorites(int repoId)async{
+
+  Future<void> removeItemFromFavorites(int repoId) async {
     await _isar.writeTxn(() async {
       await _isar.githubRepoModels.deleteByRepoId(repoId);
     });

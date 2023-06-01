@@ -10,7 +10,6 @@ class AppRouter {
   const AppRouter._();
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final Object? arguments = settings.arguments;
     log('⤴️ ${settings.name}');
     switch (settings.name) {
       case SplashScreen.routeName:

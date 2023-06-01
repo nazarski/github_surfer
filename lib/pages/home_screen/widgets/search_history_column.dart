@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_surfer/constants/app_strings.dart';
+import 'package:github_surfer/resources/app_strings.dart';
 import 'package:github_surfer/pages/home_screen/widgets/repo_item_wrap.dart';
 import 'package:github_surfer/providers/github_repository_provider.dart';
 import 'package:github_surfer/providers/search_history_provider.dart';
 import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_styles.dart';
 
+///Section with list of recent search values saved to local db
 class SearchHistoryColumn extends ConsumerWidget {
   const SearchHistoryColumn({Key? key}) : super(key: key);
 
@@ -54,6 +55,7 @@ class SearchHistoryColumn extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
+                        ///Triggers search API func
                         ref
                             .read(paginatedRequestProvider.notifier)
                             .setNewValue(data[index].searchValue);

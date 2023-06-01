@@ -1,7 +1,7 @@
 import 'package:github_surfer/data/github_api_data.dart';
 import 'package:github_surfer/entities/paginated_request.dart';
 import 'package:github_surfer/entities/paginated_response.dart';
-import 'package:github_surfer/models/github_repo_model.dart';
+import 'package:github_surfer/models/githib_repo_model/github_repo_model.dart';
 
 class GithubRepoRepository {
   final GithubApiData githubApi;

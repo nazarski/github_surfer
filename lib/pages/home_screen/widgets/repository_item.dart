@@ -1,12 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_surfer/pages/home_screen/widgets/favorite_star_builder.dart';
 import 'package:github_surfer/pages/home_screen/widgets/repo_item_wrap.dart';
 import 'package:github_surfer/providers/github_repository_provider.dart';
 import 'package:github_surfer/resources/app_styles.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+///Single repo item fetched from API
 class RepositoryItem extends ConsumerWidget {
   const RepositoryItem({
     super.key,
@@ -47,5 +48,3 @@ class RepositoryItem extends ConsumerWidget {
     );
   }
 }
-
-

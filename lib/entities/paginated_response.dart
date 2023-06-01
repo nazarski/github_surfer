@@ -1,20 +1,13 @@
-enum FetchStatus {
-  loading,
-  success,
-  error,
-}
+///Response class holds list of response items [listOfRepos], total number of pages [totalResults]
+///and total number of results to be fetched [totalResults]
 
 class PaginatedResponse<T> {
-  // final int page;
   final List<T> listOfRepos;
-  // final FetchStatus status;
   final int totalResults;
   final int totalPages;
 
   PaginatedResponse({
-    // this.page = 1,
     this.listOfRepos = const [],
-    // this.status = FetchStatus.loading,
     this.totalResults = 0,
     this.totalPages = 1,
   });
@@ -25,9 +18,7 @@ class PaginatedResponse<T> {
     required int maxItems,
   }) {
     return PaginatedResponse(
-      // page: map['page'] as int,
       listOfRepos: listOfRepos,
-      // status: map['status'] as FetchStatus,
       totalResults: map['total_count'] as int,
       totalPages: map['total_count'] ~/ maxItems,
     );

@@ -7,6 +7,7 @@ import 'package:github_surfer/resources/app_colors.dart';
 import 'package:github_surfer/resources/app_icons.dart';
 import 'package:github_surfer/resources/app_styles.dart';
 
+///Scrollable list of favorite repos
 class FavoritesList extends ConsumerWidget {
   const FavoritesList({Key? key}) : super(key: key);
 

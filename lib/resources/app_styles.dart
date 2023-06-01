@@ -7,18 +7,15 @@ class AppStyles {
     color: AppColors.textPrimary,
     fontWeight: FontWeight.w600,
     fontSize: 16,
-    height: 1.9,
   );
   static const TextStyle body = TextStyle(
     color: AppColors.textPrimary,
     fontWeight: FontWeight.w400,
     fontSize: 14,
-    // height: 2.0,
   );
   static const TextStyle bodyMessage = TextStyle(
     color: AppColors.textPlaceHolder,
     fontWeight: FontWeight.w400,
     fontSize: 14,
-    // height: 2.0,
   );
 }
